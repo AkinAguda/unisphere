@@ -208,7 +208,11 @@
 			{surfacePoint}
 			visibilityDelay={index * 0.01}
 			onclick={() => {
-				selectedPoint = point.id;
+				if (selectedPoint !== point.id) {
+					selectedPoint = point.id;
+				} else {
+					selectedPoint = undefined;
+				}
 			}}
 		/>
 	{/each}
