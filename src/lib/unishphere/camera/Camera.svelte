@@ -27,7 +27,9 @@
 		end: Vector3,
 		t: number,
 		easeFn: (t: number) => number,
-		baseVelocity: number
+		baseVelocity: number,
+		startDistance: number,
+		endDistance: number
 	): Vector3 => {
 		const startNorm = start.clone().normalize();
 		const endNorm = end.clone().normalize();
@@ -36,7 +38,7 @@
 		const angle = Math.acos(MathUtils.clamp(cosAngle, -1, 1));
 
 		// Dynamically adjust velocity based on angle
-		const velocityScale = 1 + angle / Math.PI; // Increases velocity for longer distances
+		const velocityScale = 1 + angle / Math.PI;
 		const scaledVelocity = baseVelocity * velocityScale;
 
 		const movementDuration = angle / ((scaledVelocity * Math.PI) / 180);
@@ -52,14 +54,17 @@
 		const a = Math.sin(angle * (1 - easedT)) / sinAngle;
 		const b = Math.sin(angle * easedT) / sinAngle;
 
-		// Preserve the original distance of the start position
-		const originalDistance = start.length();
-
-		return startNorm
+		// Create interpolated vector and normalize it
+		const interpolatedVector = startNorm
 			.multiplyScalar(a)
 			.add(endNorm.multiplyScalar(b))
-			.normalize()
-			.multiplyScalar(originalDistance);
+			.normalize();
+
+		// Interpolate the distance with the same easing
+		const interpolatedDistance = MathUtils.lerp(startDistance, endDistance, easedT);
+
+		// Scale to interpolated distance
+		return interpolatedVector.multiplyScalar(interpolatedDistance);
 	};
 
 	let startTime: number | null = null;
@@ -116,7 +121,9 @@
 			targetPosition,
 			elapsedTime,
 			EASINGS.easeOutCubic,
-			velocity
+			velocity,
+			startPosition.length(),
+			10
 		);
 
 		camera.position.copy(interpolatedPosition);
