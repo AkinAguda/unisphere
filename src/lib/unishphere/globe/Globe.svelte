@@ -25,7 +25,7 @@
 	const { renderer } = useThrelte();
 
 	const loadTextures = async () => {
-		const earthSpecularMap = await loader.load('/assets/earth/earth-specular-map.jpg');
+		const earthSpecularMap = await loader.load('/assets/earth/earth-specular-map.png');
 		earthSpecularMap.magFilter = LinearFilter;
 		return { earthSpecularMap };
 	};
