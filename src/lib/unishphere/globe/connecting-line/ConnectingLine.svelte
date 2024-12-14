@@ -23,10 +23,11 @@
 	// Calculate dynamic arch speed based on distance
 	const distanceFactor = origin.distanceTo(destination);
 	const baseArchSpeed = Math.max(0.2, Math.min(1 / (distanceFactor * 0.4), 1)); // Adjust multipliers as needed
+	const tubeSegments = Math.round(clamp(distanceFactor * 50, 30, 90));
 
 	const intermediatePoints = (() => {
 		const points = [];
-		const numPoints = Math.round(clamp(distanceFactor * 20, 10, 40));
+		const numPoints = Math.round(clamp(distanceFactor * 20, 10, 30));
 
 		const arcHeight = Math.min((Math.pow(distanceFactor, 2) * 0.1) / sphereRadius, 0.3);
 
@@ -125,7 +126,7 @@
 </T.Group>
 
 <T.Mesh castShadow={false} receiveShadow={false}>
-	<T.TubeGeometry args={[curve, 60, 0.0025, 8, false]} />
+	<T.TubeGeometry args={[curve, tubeSegments, 0.0025, 8, false]} />
 	<T.ShaderMaterial
 		depthWrite={false}
 		oncreate={(m) => {
