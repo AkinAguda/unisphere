@@ -6,7 +6,7 @@
 	import { latLonToSphereCoords } from '$lib/utility/lat-lon-to-sphere-coords';
 	import { CAMERA_INIT_POSITION, EASINGS } from '$lib/constants/unisphere';
 	import type { Point } from '$lib/types/unisphere';
-	import { isDraggingGlobe, globeGroup } from '$lib/stores/globe';
+	import { globeGroup } from '$lib/stores/globe';
 
 	let camera: PerspectiveCamera | undefined = undefined;
 
@@ -139,11 +139,5 @@
 	position={CAMERA_INIT_POSITION.toArray()}
 	fov={15}
 >
-	<OrbitControls
-		maxDistance={15}
-		minDistance={9}
-		enableZoom={true}
-		enabled={!isDraggingGlobe.$}
-		enableDamping
-	/>
+	<OrbitControls maxDistance={15} minDistance={9} enableZoom={true} enableDamping />
 </T.PerspectiveCamera>

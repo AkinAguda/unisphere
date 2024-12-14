@@ -1,15 +1,6 @@
 <script lang="ts" generics="T extends string">
-	import { T, useCamera, useTask } from '@threlte/core';
-	import { interactivity, useCursor } from '@threlte/extras';
-	import {
-		Color,
-		Texture,
-		Vector3,
-		ShaderMaterial,
-		Quaternion,
-		MathUtils,
-		AdditiveBlending
-	} from 'three';
+	import { T, useTask } from '@threlte/core';
+	import { Color, Texture, ShaderMaterial, AdditiveBlending } from 'three';
 
 	import { CENTER_POSITION, PLANET_RADIUS } from '$lib/constants/unisphere';
 	import { getIndicatorType } from '$lib/utility/get-indicator-type';
@@ -24,7 +15,7 @@
 	import Indicator from './indicator/Indicator.svelte';
 	import ConnectingLine from './connecting-line/ConnectingLine.svelte';
 	import type { BaseGlobeProps } from './types';
-	import { directionalLight, globeGroup, isDraggingGlobe } from '$lib/stores/globe';
+	import { directionalLight, globeGroup } from '$lib/stores/globe';
 	import FloatingParticles from './floating-particles/FloatingParticles.svelte';
 
 	interface Props<T extends string> extends BaseGlobeProps<T> {
@@ -46,9 +37,6 @@
 
 	let fresnelShader: ShaderMaterial | undefined = $state(undefined);
 
-	let lastX = $state(0);
-	let lastY = $state(0);
-
 	const pointsMap = $derived(
 		points.reduce(
 			(pointsMap, point) => {
@@ -59,94 +47,17 @@
 		)
 	);
 
-	interactivity();
-
-	let isPointerDown = $state(false);
-
-	const { camera } = useCamera();
-
 	useTask((delta) => {
 		if (fresnelShader && directionalLight.$) {
 			fresnelShader.uniforms.directionalLight.value = directionalLight.$.position.clone();
 		}
 
-		if (isDraggingGlobe.$) {
-			selectedPoint = undefined;
-		} else {
-			if (globeGroup.$) {
-				if (!selectedPoint) {
-					globeGroup.$.rotation.y += 0.09 * delta;
-				}
+		if (globeGroup.$) {
+			if (!selectedPoint) {
+				globeGroup.$.rotation.y += 0.09 * delta;
 			}
 		}
 	});
-
-	const { hovering } = useCursor('grabbing');
-
-	$effect(() => {
-		$hovering = isDraggingGlobe.$;
-	});
-
-	const handlePointerUp = () => {
-		isDraggingGlobe.$ = false;
-		isPointerDown = false;
-	};
-
-	const handlePointerDown = (e: any) => {
-		isPointerDown = true;
-		if (globeGroup) {
-			lastX = e.nativeEvent.clientX;
-			lastY = e.nativeEvent.clientY;
-		}
-	};
-
-	const handlePointerMove = (e: any) => {
-		if (isPointerDown) {
-			isDraggingGlobe.$ = true;
-			$hovering = true;
-		}
-
-		if (!isDraggingGlobe.$) return;
-
-		selectedPoint = undefined;
-
-		const ROTATION_SPEED = 0.3;
-		const deltaX = e.nativeEvent.clientX - lastX;
-		const deltaY = e.nativeEvent.clientY - lastY;
-
-		// Get camera's view direction
-		const viewDirection = new Vector3();
-		$camera.getWorldDirection(viewDirection);
-
-		// Calculate camera's right and up vectors manually
-		const worldUp = new Vector3(0, 1, 0);
-		const cameraRight = new Vector3().crossVectors(viewDirection, worldUp).normalize();
-		const cameraUp = new Vector3().crossVectors(cameraRight, viewDirection).normalize();
-
-		// Create quaternions for rotations
-		const rotationX = new Quaternion().setFromAxisAngle(
-			cameraUp,
-			MathUtils.degToRad(deltaX * ROTATION_SPEED)
-		);
-
-		const rotationY = new Quaternion().setFromAxisAngle(
-			cameraRight,
-			MathUtils.degToRad(deltaY * ROTATION_SPEED)
-		);
-
-		// Combine rotations
-		const combinedRotation = rotationX.multiply(rotationY);
-
-		// Apply rotation to globe group
-		if (globeGroup.$) {
-			globeGroup.$.quaternion.premultiply(combinedRotation);
-			globeGroup.$.quaternion.normalize();
-		}
-
-		// Update last mouse position
-		lastX = e.nativeEvent.clientX;
-		lastY = e.nativeEvent.clientY;
-	};
 </script>
 
 <T.Group
@@ -155,11 +66,7 @@
 	}}
 	position={CENTER_POSITION.toArray()}
 >
-	<T.Mesh
-		onpointerup={handlePointerUp}
-		onpointerdown={handlePointerDown}
-		onpointermove={handlePointerMove}
-	>
+	<T.Mesh>
 		<T.SphereGeometry args={[PLANET_RADIUS, 28, 28]} />
 		<T.MeshStandardMaterial {bumpMap} bumpScale={2} {map} />
 	</T.Mesh>

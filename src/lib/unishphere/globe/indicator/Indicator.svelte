@@ -1,7 +1,11 @@
 <script lang="ts" generics="T extends string">
 	import { Mesh, Quaternion, ShaderMaterial, Vector3 } from 'three';
 	import { T, useTask } from '@threlte/core';
-	import { useCursor, useInteractivity } from '@threlte/extras';
+	import {
+		// useCursor,
+		interactivity,
+		useCursor
+	} from '@threlte/extras';
 
 	import type { Point, PointInidicatorTypes } from '$lib/types/unisphere';
 	import { EASINGS } from '$lib/constants/unisphere';
@@ -102,16 +106,11 @@
 	const VERTICAL_INDICATOR_LENGTH = 0.13;
 	const VERTICAL_INDICATOR_OFFSET = VERTICAL_INDICATOR_LENGTH / 2 - 0.007;
 
-	useInteractivity();
-
-	const { onPointerEnter, onPointerLeave } = useCursor('pointer');
+	interactivity();
+	const { onPointerEnter, onPointerLeave } = useCursor();
 </script>
 
-<T.Group
-	interactive
-	position={translatedPosition.toArray()}
-	quaternion={rotationQuaternion.toArray()}
->
+<T.Group position={translatedPosition.toArray()} quaternion={rotationQuaternion.toArray()}>
 	{#if selectedPoint === point.id}
 		<T.Mesh rotation.x={-Math.PI / 2}>
 			<T.PlaneGeometry args={[0.15, 0.15]} />

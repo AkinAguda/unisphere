@@ -16,7 +16,6 @@
 
 	import vertexShader from './shaders/vertex-shader.glsl?raw';
 	import fragmentShader from './shaders/fragment-shader.glsl?raw';
-	import { isDraggingGlobe, isDraggingScene } from '$lib/stores/globe';
 	import type { Snippet } from 'svelte';
 	import type { Point } from '$lib/types/unisphere';
 
@@ -73,21 +72,13 @@
 
 <T.Mesh
 	onpointerup={() => {
-		isDraggingGlobe.$ = false;
-		isDraggingScene.$ = false;
 		isMouseDown = false;
 	}}
 	onpointerdown={() => {
 		isMouseDown = true;
 	}}
 	onpointermove={() => {
-		if (isMouseDown) {
-			isDraggingScene.$ = true;
-		} else {
-			isDraggingScene.$ = false;
-		}
-
-		if (isDraggingScene.$) {
+		if (isMouseDown && selectedPoint) {
 			selectedPoint = undefined;
 		}
 	}}
