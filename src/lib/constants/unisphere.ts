@@ -1,5 +1,6 @@
 import { Vector3 } from 'three';
 import type { PointIntensityThresholds, PointStyles } from '$lib/types/unisphere';
+import { getResponsiveValue } from '$lib/utility/get-responsive-value';
 
 export const CENTER_POSITION = new Vector3(0, 0, 0);
 
@@ -25,7 +26,7 @@ export const EASINGS = {
 	easeInOutCubic: (t: number) => (t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1)
 };
 
-export const PLANET_RADIUS = 1;
+export const getPlanetRadius = () => getResponsiveValue({ base: 0.7, sm: 1 });
 
 export const DEFAULT_POINT_STYlES: PointStyles<string> = {
 	sm: 'beacon',

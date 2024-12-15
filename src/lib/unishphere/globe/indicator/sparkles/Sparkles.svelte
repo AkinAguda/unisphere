@@ -4,6 +4,7 @@
 
 	import vertexShader from './shaders/vertex-shader.glsl?raw';
 	import fragmentShader from './shaders/fragment-shader.glsl?raw';
+	import { getResponsiveValue } from '$lib/utility/get-responsive-value';
 
 	type ParticleSystemProps = {
 		position?: Vector3;
@@ -12,7 +13,7 @@
 	const { position = new Vector3(0, 0, 0) }: ParticleSystemProps = $props();
 
 	const LIFETIME = 2;
-	const PARTICLES_COUNT = 70;
+	const PARTICLES_COUNT = getResponsiveValue({ base: 30, sm: 70 });
 
 	let shaderMaterial = $state<ShaderMaterial | undefined>(undefined);
 

@@ -2,7 +2,7 @@
 	import { T, useTask } from '@threlte/core';
 	import { Color, Texture, ShaderMaterial, AdditiveBlending } from 'three';
 
-	import { CENTER_POSITION, PLANET_RADIUS } from '$lib/constants/unisphere';
+	import { CENTER_POSITION, getPlanetRadius } from '$lib/constants/unisphere';
 	import { getIndicatorType } from '$lib/utility/get-indicator-type';
 	import { createPOICoords, latLonToSphereCoords } from '$lib/utility/lat-lon-to-sphere-coords';
 
@@ -17,6 +17,7 @@
 	import type { BaseGlobeProps } from './types';
 	import { directionalLight, globeGroup } from '$lib/stores/globe';
 	import FloatingParticles from './floating-particles/FloatingParticles.svelte';
+	import { getResponsiveValue } from '$lib/utility/get-responsive-value';
 
 	interface Props<T extends string> extends BaseGlobeProps<T> {
 		map: Texture;
@@ -58,6 +59,9 @@
 			}
 		}
 	});
+
+	const planetRadius = getPlanetRadius();
+	const outerOrbPadding = getResponsiveValue({ base: 0.2, sm: 0.3 });
 </script>
 
 <T.Group
@@ -67,12 +71,12 @@
 	position={CENTER_POSITION.toArray()}
 >
 	<T.Mesh>
-		<T.SphereGeometry args={[PLANET_RADIUS, 28, 28]} />
+		<T.SphereGeometry args={[planetRadius, 28, 28]} />
 		<T.MeshStandardMaterial {bumpMap} bumpScale={2} {map} />
 	</T.Mesh>
 
 	<T.Mesh>
-		<T.IcosahedronGeometry args={[PLANET_RADIUS + 0.002, 14, 14]} />
+		<T.IcosahedronGeometry args={[planetRadius + 0.002, 14, 14]} />
 		<T.ShaderMaterial
 			attach="material"
 			fragmentShader={glowFragmentSahder}
@@ -88,7 +92,7 @@
 	</T.Mesh>
 
 	<T.Mesh>
-		<T.IcosahedronGeometry args={[PLANET_RADIUS + 0.3, 10, 10]} />
+		<T.IcosahedronGeometry args={[planetRadius + outerOrbPadding, 10, 10]} />
 		<T.ShaderMaterial
 			depthWrite={false}
 			attach="material"
@@ -136,7 +140,7 @@
 
 {#if directionalLight.$}
 	<T.Mesh renderOrder={1} position={CENTER_POSITION.toArray()}>
-		<T.IcosahedronGeometry args={[PLANET_RADIUS + 0.012, 14, 14]} />
+		<T.IcosahedronGeometry args={[planetRadius + 0.012, 14, 14]} />
 		<T.ShaderMaterial
 			blending={AdditiveBlending}
 			oncreate={(v) => {

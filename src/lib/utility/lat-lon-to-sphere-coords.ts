@@ -1,6 +1,11 @@
+import { getPlanetRadius } from '$lib/constants/unisphere';
 import { Vector3 } from 'three';
 
-export const latLonToSphereCoords = (lat: number, lon: number, radius: number = 1): Vector3 => {
+export const latLonToSphereCoords = (
+	lat: number,
+	lon: number,
+	radius: number = getPlanetRadius()
+): Vector3 => {
 	const latRad = lat * (Math.PI / 180);
 	const lonRad = -lon * (Math.PI / 180);
 

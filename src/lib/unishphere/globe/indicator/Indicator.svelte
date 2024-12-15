@@ -20,6 +20,7 @@
 	import glowingHexagonVertexShader from './glowing-hexagon-shaders/vertex-shader.glsl?raw';
 	import { clamp, inverseLerp } from 'three/src/math/MathUtils.js';
 	import Sparkles from './sparkles/Sparkles.svelte';
+	import { getResponsiveValue } from '$lib/utility/get-responsive-value';
 
 	type Props<T extends string> = {
 		surfacePoint: Vector3;
@@ -103,7 +104,7 @@
 
 	const VERTICAL_INDICATOR_RADIUS = 0.0025;
 	const INIDICATOR_CUBE_SIZE = 0.008;
-	const VERTICAL_INDICATOR_LENGTH = 0.13;
+	const VERTICAL_INDICATOR_LENGTH = getResponsiveValue({ base: 0.08, sm: 0.13 });
 	const VERTICAL_INDICATOR_OFFSET = VERTICAL_INDICATOR_LENGTH / 2 - 0.007;
 
 	interactivity();
