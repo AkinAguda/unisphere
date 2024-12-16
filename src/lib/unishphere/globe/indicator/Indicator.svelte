@@ -91,8 +91,6 @@
 		}
 
 		if (topBoxMeshRef) {
-			topBoxMeshRef.rotation.x += 0.01;
-			topBoxMeshRef.rotation.y += 0.01;
 			const computedScale = clamp(
 				inverseLerp(STEM_REVEAL_DURATION, STEM_REVEAL_DURATION + 0.5, timeSinceMount),
 				0,
