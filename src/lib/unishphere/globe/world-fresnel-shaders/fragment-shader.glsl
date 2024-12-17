@@ -8,7 +8,7 @@ varying vec3 vLightDirection;
 
 void main() {
     vec3 viewDirection = normalize(vViewPosition);
-    vec3 fresnelColor = vec3(0.1059, 0.1137, 0.0353);
+    vec3 fresnelColor = vec3(0.2078, 0.2235, 0.0667);
     
     // Narrow the Fresnel effect to only near edges
     float edgeDot = 1.0 - max(dot(vNormal, viewDirection), 0.0);
