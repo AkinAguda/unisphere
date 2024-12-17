@@ -42,6 +42,7 @@
 	</T.BufferGeometry>
 
 	<T.ShaderMaterial
+		transparent
 		oncreate={(c) => {
 			shaderRef = c;
 		}}
