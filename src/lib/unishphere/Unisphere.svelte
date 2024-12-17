@@ -1,4 +1,4 @@
-<script lang="ts" generics="const T extends string[]">
+<script lang="ts" generics="const T extends readonly string[]">
 	import { Canvas, T } from '@threlte/core';
 
 	import Globe from './globe/Globe.svelte';
@@ -13,9 +13,9 @@
 	} from '$lib/types/unisphere';
 	import { DEFAULT_POINT_STYlES, DEFAULT_POINT_THRESHOLDS } from '$lib/constants/unisphere';
 
-	type Props<T extends string[]> = {
+	type Props<T extends readonly string[]> = {
 		points: Point<T[number]>[];
-		connections: Connection[];
+		connections?: Connection[];
 		types: T;
 		selectedPoint?: Point<T[number]>['id'];
 		pointStyles?: Partial<PointStyles<T[number]>>;
@@ -27,7 +27,7 @@
 	let {
 		points,
 		selectedPoint = $bindable(),
-		connections,
+		connections = [],
 		types,
 		pointStyles: pointStylesFromProps = {},
 		thresholds = DEFAULT_POINT_THRESHOLDS
