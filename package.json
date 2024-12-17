@@ -56,9 +56,8 @@
 		"vitest": "^2.0.4"
 	},
 	"dependencies": {
-		"@threlte/core": "^8.0.0-next.30",
-		"@threlte/extras": "^9.0.0-next.39",
-		"@threlte/theatre": "^3.0.0-next.9",
+		"@threlte/core": "^8.0.0-next.33",
+		"@threlte/extras": "^9.0.0-next.45",
 		"ionia": "^0.0.7",
 		"three": "^0.170.0"
 	}
