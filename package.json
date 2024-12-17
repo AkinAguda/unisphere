@@ -1,7 +1,7 @@
 {
 	"name": "@rayonlabs/unisphere",
 	"description": "Earth coordinates visualiser",
-	"version": "0.0.1",
+	"version": "0.0.2--canary.43a7cb3.0",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
