@@ -148,9 +148,10 @@
 	>
 		{#if type === 'tower'}
 			<T.Group rotation.x={-Math.PI / 2} depthWrite={false}>
-				<T.Mesh castShadow={false} receiveShadow={false} depthWrite={false} position.z={0.012}>
+				<T.Mesh position.z={0.012}>
 					<T.PlaneGeometry args={[0.02, 0.02]} />
 					<T.ShaderMaterial
+						depthWrite={false}
 						transparent
 						vertexShader={glowingHexagonVertexShader}
 						fragmentShader={glowingHexagonFragmentShader}
@@ -168,9 +169,10 @@
 					/>
 				</T.Mesh>
 
-				<T.Mesh castShadow={false} receiveShadow={false} depthWrite={false}>
+				<T.Mesh>
 					<T.PlaneGeometry args={[0.04, 0.04]} />
 					<T.ShaderMaterial
+						depthWrite={false}
 						transparent
 						vertexShader={glowingHexagonVertexShader}
 						fragmentShader={glowingHexagonFragmentShader}
