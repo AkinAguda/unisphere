@@ -16,6 +16,7 @@
 		"test": "npm run test:unit -- --run",
 		"release": "npm run prepublishOnly && npx auto shipit"
 	},
+	"author": "rayonlabs",
 	"repository": {
 		"url": "https://github.com/rayonlabs/unisphere.git"
 	},
