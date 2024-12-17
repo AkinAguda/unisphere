@@ -9,7 +9,7 @@ float detmineIfWaterOrLand(vec4 texColor) {
 
 void main() {
     vec4 darkestWaterColor = vec4(0.0, 0.0, 0.0, 1.0);
-    vec4 darkestLandColor = vec4(0.1333, 0.1333, 0.1333, 1.0);
+    vec4 darkestLandColor = vec4(0.0824, 0.0824, 0.0824, 1.0);
     vec4 texColor = texture2D(earthSpecularMap, vUvs);
     vec4 color = vec4(0.0);
 
