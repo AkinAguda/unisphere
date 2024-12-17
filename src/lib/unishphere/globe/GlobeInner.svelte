@@ -1,6 +1,6 @@
 <script lang="ts" generics="T extends string">
 	import { T, useTask } from '@threlte/core';
-	import { Color, Texture, ShaderMaterial, AdditiveBlending } from 'three';
+	import { Color, Texture, ShaderMaterial, AdditiveBlending, MeshStandardMaterial } from 'three';
 
 	import { CENTER_POSITION, getPlanetRadius } from '$lib/constants/unisphere';
 	import { getIndicatorType } from '$lib/utility/get-indicator-type';
@@ -37,6 +37,9 @@
 	type PointInstance = (typeof points)[number];
 
 	let fresnelShader: ShaderMaterial | undefined = $state(undefined);
+	let worldMaterial: MeshStandardMaterial | undefined = $state(undefined);
+	let earthGlowShader: ShaderMaterial | undefined = $state(undefined);
+	let earthOrbShader: ShaderMaterial | undefined = $state(undefined);
 
 	const pointsMap = $derived(
 		points.reduce(
@@ -48,9 +51,26 @@
 		)
 	);
 
+	const revealTime = { value: 0 };
+
 	useTask((delta) => {
+		revealTime.value = Math.min(revealTime.value + delta * 1.5, 1);
+
+		if (worldMaterial) {
+			worldMaterial.opacity = revealTime.value;
+		}
+
 		if (fresnelShader && directionalLight.$) {
 			fresnelShader.uniforms.directionalLight.value = directionalLight.$.position.clone();
+			fresnelShader.uniforms.revealOpacity.value = revealTime.value;
+		}
+
+		if (earthGlowShader) {
+			earthGlowShader.uniforms.revealOpacity.value = revealTime.value;
+		}
+
+		if (earthOrbShader) {
+			earthOrbShader.uniforms.revealOpacity.value = revealTime.value;
 		}
 
 		if (globeGroup.$) {
@@ -72,12 +92,23 @@
 >
 	<T.Mesh>
 		<T.SphereGeometry args={[planetRadius, 28, 28]} />
-		<T.MeshStandardMaterial {bumpMap} bumpScale={2} {map} />
+		<T.MeshStandardMaterial
+			oncreate={(m) => {
+				worldMaterial = m;
+			}}
+			transparent
+			{bumpMap}
+			bumpScale={2}
+			{map}
+		/>
 	</T.Mesh>
 
 	<T.Mesh>
 		<T.IcosahedronGeometry args={[planetRadius + 0.002, 14, 14]} />
 		<T.ShaderMaterial
+			oncreate={(s) => {
+				earthGlowShader = s;
+			}}
 			attach="material"
 			fragmentShader={glowFragmentSahder}
 			vertexShader={glowVertexSahder}
@@ -85,7 +116,10 @@
 				color: { value: new Color(0x000000) },
 				fresnelColor: { value: new Color(0xffffff) },
 				fresnelPower: { value: 0.7 },
-				fresnelScale: { value: 0.7 }
+				fresnelScale: { value: 0.7 },
+				revealOpacity: {
+					value: 0.0
+				}
 			}}
 			transparent
 		/>
@@ -94,6 +128,9 @@
 	<T.Mesh>
 		<T.IcosahedronGeometry args={[planetRadius + outerOrbPadding, 10, 10]} />
 		<T.ShaderMaterial
+			oncreate={(s) => {
+				earthOrbShader = s;
+			}}
 			depthWrite={false}
 			attach="material"
 			fragmentShader={glowFragmentSahder}
@@ -102,7 +139,10 @@
 				color: { value: new Color(0x000000) },
 				fresnelColor: { value: new Color(0xffffff) },
 				fresnelPower: { value: 0.7 },
-				fresnelScale: { value: 0.7 }
+				fresnelScale: { value: 0.7 },
+				revealOpacity: {
+					value: 0.0
+				}
 			}}
 			transparent
 		/>
@@ -154,6 +194,9 @@
 				fresnelScale: { value: 1.2 },
 				directionalLight: {
 					value: directionalLight.$.position.clone()
+				},
+				revealOpacity: {
+					value: 0.0
 				}
 			}}
 		/>

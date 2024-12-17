@@ -2,6 +2,7 @@ uniform vec3 color;
 uniform vec3 fresnelColor;
 uniform float fresnelPower;
 uniform float fresnelScale;
+uniform float revealOpacity;
 
 varying vec3 vNormal;
 varying vec3 vViewPosition;
@@ -19,5 +20,5 @@ void main() {
     vec3 diffuseLight = dp * lightColor;
 
 
-    gl_FragColor = vec4(finalColor * diffuseLight, fresnelFactor);
+    gl_FragColor = vec4(finalColor * diffuseLight, fresnelFactor * revealOpacity);
 }
