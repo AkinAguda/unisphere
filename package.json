@@ -17,7 +17,7 @@
 		"release": "npm run prepublishOnly && npx auto shipit"
 	},
 	"repository": {
-		"url": "https://github.com/rayonlabs/unisphere"
+		"url": "https://github.com/rayonlabs/unisphere.git"
 	},
 	"license": "MIT",
 	"files": [
