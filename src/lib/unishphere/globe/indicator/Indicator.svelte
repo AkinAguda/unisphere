@@ -232,7 +232,7 @@
 			receiveShadow={false}
 		>
 			<T.BoxGeometry args={[INIDICATOR_CUBE_SIZE, INIDICATOR_CUBE_SIZE, INIDICATOR_CUBE_SIZE]} />
-			<T.MeshStandardMaterial color={selectedPoint === point.id ? '#f3f700' : '#ebebeb'} />
+			<T.MeshStandardMaterial color={selectedPoint === point.id ? '#f2e30c' : '#ffffff'} />
 		</T.Mesh>
 	</T.Group>
 	<!-- {/if} -->
