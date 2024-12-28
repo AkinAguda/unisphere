@@ -20,12 +20,10 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Use Node.js 12.x
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 12.x
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@rayonlabs'
+          node-version: latest
 
       - name: Create release
         run: |
@@ -33,4 +31,3 @@ jobs:
           npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
