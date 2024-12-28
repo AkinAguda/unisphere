@@ -82,5 +82,5 @@ void main() {
 
     colour = generateStars(pixelCoords);
 
-    gl_FragColor = vec4(colour * vec3(0.9176, 0.9216, 0.6784), 1.0);
+    gl_FragColor = vec4(colour, 1.0);
 }

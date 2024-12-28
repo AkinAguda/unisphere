@@ -15,14 +15,20 @@ void main() {
     float localTime = mod(time - instanceStartTime, lifetime);
     
     vec3 displaced = instanceOffset + instanceVelocity * localTime;
-
-    vColor = instanceColor;
     
+    // Transform the position into view space
+    vec4 viewPosition = modelViewMatrix * vec4(displaced, 1.0);
+    
+    // Calculate distance from camera
+    float distanceToCamera = -viewPosition.z;
+    
+    vColor = instanceColor;
     vAlpha = 1.0 - smoothstep(lifetime * 0.7, lifetime, localTime);
-
     vLifetime = localTime / lifetime;
 
-    gl_PointSize = 10.0 * (1.0 - vLifetime);
+    // Adjust point size based on distance
+    float baseSize = 10.0 * (1.0 - vLifetime);
+    gl_PointSize = baseSize * (10.0 / distanceToCamera);
     
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);
+    gl_Position = projectionMatrix * viewPosition;
 }
