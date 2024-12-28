@@ -20,15 +20,17 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node
+      - name: Use Node.js 12.x
         uses: actions/setup-node@v4
         with:
-          node-version: latest
-
-      - name: Install dependencies
-        run: npm install
+          node-version: 12.x
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@rayonlabs'
 
       - name: Create release
-        run: npm run release
+        run: |
+          npm install --frozen-lockfile
+          npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
