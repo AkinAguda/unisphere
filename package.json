@@ -14,7 +14,7 @@
 		"lint": "prettier --check . && eslint .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
-		"release": "npm run prepublishOnly && npx auto shipit"
+		"release": "npm run prepublishOnly && npx auto shipit --base-branch release"
 	},
 	"author": "rayonlabs",
 	"repository": {
