@@ -1,3 +1,18 @@
+# v0.0.5 (Mon Jan 20 2025)
+
+#### 🐛 Bug Fix
+
+- Package.lock version upgrade [#9](https://github.com/rayonlabs/unisphere/pull/9) ([@AkinAguda](https://github.com/AkinAguda))
+- Updated lock file [#8](https://github.com/rayonlabs/unisphere/pull/8) ([@AkinAguda](https://github.com/AkinAguda))
+- Release version 0.05 [#7](https://github.com/rayonlabs/unisphere/pull/7) ([@AkinAguda](https://github.com/AkinAguda))
+- Enhanced API to enable more flexible point customisation [#6](https://github.com/rayonlabs/unisphere/pull/6) ([@AkinAguda](https://github.com/AkinAguda))
+
+#### Authors: 1
+
+- Akinwunmi Aguda ([@AkinAguda](https://github.com/AkinAguda))
+
+---
+
 # v0.0.3 (Sun Dec 29 2024)
 
 #### 🐛 Bug Fix
