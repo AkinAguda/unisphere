@@ -7,13 +7,14 @@
 	import { getResponsiveValue } from '$lib/utility/get-responsive-value';
 
 	type ParticleSystemProps = {
-		position?: Vector3;
+		position: Vector3;
+		particleCount?: number;
 	};
 
-	const { position = new Vector3(0, 0, 0) }: ParticleSystemProps = $props();
+	const { position = new Vector3(0, 0, 0), particleCount }: ParticleSystemProps = $props();
 
 	const LIFETIME = 2;
-	const PARTICLES_COUNT = getResponsiveValue({ base: 30, sm: 70 });
+	const PARTICLES_COUNT = particleCount ?? getResponsiveValue({ base: 30, sm: 70 });
 
 	let shaderMaterial = $state<ShaderMaterial | undefined>(undefined);
 
