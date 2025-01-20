@@ -1,13 +1,9 @@
 <script lang="ts" generics="T extends string">
 	import { Mesh, Quaternion, ShaderMaterial, Vector3 } from 'three';
 	import { T, useTask } from '@threlte/core';
-	import {
-		// useCursor,
-		interactivity,
-		useCursor
-	} from '@threlte/extras';
+	import { interactivity, useCursor } from '@threlte/extras';
 
-	import type { Point, PointInidicatorTypes } from '$lib/types/unisphere';
+	import type { Point, PointStyleBreakpointValueObject } from '$lib/types/unisphere';
 	import { EASINGS } from '$lib/constants/unisphere';
 
 	import ringPulseFragmentShader from '../pulsing-ring-shaders/fragment-shader.glsl?raw';
@@ -25,7 +21,7 @@
 	type Props<T extends string> = {
 		surfacePoint: Vector3;
 		direction: Vector3;
-		type: PointInidicatorTypes;
+		inidcatorType: PointStyleBreakpointValueObject;
 		selectedPoint?: Point<T>['id'];
 		onclick?: () => void;
 		visibilityDelay?: number;
@@ -38,7 +34,7 @@
 	const {
 		surfacePoint,
 		direction,
-		type,
+		inidcatorType,
 		selectedPoint,
 		onclick,
 		visibilityDelay = 0,
@@ -134,11 +130,13 @@
 		</T.Mesh>
 	{/if}
 
-	{#if type === 'sparkling-beacon' || type === 'sparkling-tower'}
-		<Sparkles position={new Vector3(0, 0.002, 0)} />
+	{#if inidcatorType.type === 'sparkling-beacon' || inidcatorType.type === 'sparkling-tower'}
+		<Sparkles
+			particleCount={inidcatorType.meta ? inidcatorType.meta.particleCount : undefined}
+			position={new Vector3(0, 0.002, 0)}
+		/>
 	{/if}
 
-	<!-- {#if type === 'beacon' || type === 'tower'} -->
 	<T.Group
 		{onclick}
 		onpointerenter={onPointerEnter}
@@ -146,7 +144,7 @@
 		depthWrite={false}
 		position={new Vector3(0, VERTICAL_INDICATOR_OFFSET, 0).toArray()}
 	>
-		{#if type === 'tower'}
+		{#if inidcatorType.type === 'tower'}
 			<T.Group rotation.x={-Math.PI / 2} depthWrite={false}>
 				<T.Mesh position.z={0.012}>
 					<T.PlaneGeometry args={[0.02, 0.02]} />
@@ -235,5 +233,4 @@
 			<T.MeshStandardMaterial color={selectedPoint === point.id ? '#f2e30c' : '#ffffff'} />
 		</T.Mesh>
 	</T.Group>
-	<!-- {/if} -->
 </T.Group>

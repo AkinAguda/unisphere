@@ -152,7 +152,7 @@
 		{@const { surfacePoint, direction } = createPOICoords(point.coords.lat, point.coords.lon)}
 
 		<Indicator
-			type={getIndicatorType(point, pointStyles, thresholds)}
+			inidcatorType={getIndicatorType(point, pointStyles, thresholds)}
 			{point}
 			{direction}
 			{selectedPoint}
