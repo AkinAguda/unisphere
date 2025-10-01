@@ -1,7 +1,7 @@
 {
-	"name": "@akin/unisphere",
+	"name": "@AkinAguda/unisphere",
 	"description": "Earth coordinates visualiser",
-	"version": "0.0.6",
+	"version": "0.0.7--canary.a10dede.0",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
