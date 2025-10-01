@@ -2,6 +2,8 @@
 
 A random project for mapping geographical data and connections. Initially built for an internal project at [@rayonlabs](https://github.com/rayonlabs)
 
+Check out [this deployment](https://unisphere-lake.vercel.app/)
+
 ## Features
 
 - Type-safe API for visualizing points on Earth using longitude and latitude
