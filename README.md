@@ -1,6 +1,6 @@
 # Unisphere
 
-A random project for mapping geographical data and connections.
+A random project for mapping geographical data and connections. Initially built for an internal project at [@rayonlabs](https://github.com/rayonlabs)
 
 ## Features
 
