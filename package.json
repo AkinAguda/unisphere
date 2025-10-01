@@ -1,5 +1,5 @@
 {
-	"name": "@rayonlabs/unisphere",
+	"name": "unisphere",
 	"description": "Earth coordinates visualiser",
 	"version": "0.0.6",
 	"scripts": {
@@ -16,9 +16,9 @@
 		"test": "npm run test:unit -- --run",
 		"release": "npm run prepublishOnly && npx auto shipit --base-branch release"
 	},
-	"author": "rayonlabs",
+	"author": "Akin Aguda",
 	"repository": {
-		"url": "https://github.com/rayonlabs/unisphere.git"
+		"url": "https://github.com/AkinAguda/unisphere.git"
 	},
 	"license": "MIT",
 	"files": [

@@ -1,6 +1,6 @@
 # Unisphere
 
-A modern, type-safe Globe visualization library by Rayon Labs for mapping geographical data and connections.
+A random project for mapping geographical data and connections.
 
 ## Features
 

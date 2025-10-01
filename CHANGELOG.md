@@ -2,10 +2,10 @@
 
 #### 🐛 Bug Fix
 
-- Package.lock version upgrade [#9](https://github.com/rayonlabs/unisphere/pull/9) ([@AkinAguda](https://github.com/AkinAguda))
-- Updated lock file [#8](https://github.com/rayonlabs/unisphere/pull/8) ([@AkinAguda](https://github.com/AkinAguda))
-- Release version 0.05 [#7](https://github.com/rayonlabs/unisphere/pull/7) ([@AkinAguda](https://github.com/AkinAguda))
-- Enhanced API to enable more flexible point customisation [#6](https://github.com/rayonlabs/unisphere/pull/6) ([@AkinAguda](https://github.com/AkinAguda))
+- Package.lock version upgrade ([@AkinAguda](https://github.com/AkinAguda))
+- Updated lock file ([@AkinAguda](https://github.com/AkinAguda))
+- Release version 0.05 ([@AkinAguda](https://github.com/AkinAguda))
+- Enhanced API to enable more flexible point customisation ([@AkinAguda](https://github.com/AkinAguda))
 
 #### Authors: 1
 
@@ -17,10 +17,10 @@
 
 #### 🐛 Bug Fix
 
-- With CI fix [#5](https://github.com/rayonlabs/unisphere/pull/5) ([@AkinAguda](https://github.com/AkinAguda))
-- Release CI fix [#4](https://github.com/rayonlabs/unisphere/pull/4) ([@AkinAguda](https://github.com/AkinAguda))
-- Minor release with bug fixes [#3](https://github.com/rayonlabs/unisphere/pull/3) ([@AkinAguda](https://github.com/AkinAguda))
-- Bug fixes [#2](https://github.com/rayonlabs/unisphere/pull/2) ([@AkinAguda](https://github.com/AkinAguda))
+- With CI fix ([@AkinAguda](https://github.com/AkinAguda))
+- Release CI fix ([@AkinAguda](https://github.com/AkinAguda))
+- Minor release with bug fixes ([@AkinAguda](https://github.com/AkinAguda))
+- Bug fixes ([@AkinAguda](https://github.com/AkinAguda))
 
 #### ⚠️ Pushed to `release`
 
@@ -30,7 +30,6 @@
 - Tweaks ([@AkinAguda](https://github.com/AkinAguda))
 - lockfile regen ([@AkinAguda](https://github.com/AkinAguda))
 - removed frozen lock file ([@AkinAguda](https://github.com/AkinAguda))
-- Merge branch 'main' of github.com:rayonlabs/unisphere ([@AkinAguda](https://github.com/AkinAguda))
 - changed release workflow to run on relese branch ([@AkinAguda](https://github.com/AkinAguda))
 
 #### Authors: 1
@@ -43,7 +42,7 @@
 
 #### 🐛 Bug Fix
 
-- Release prep [#1](https://github.com/rayonlabs/unisphere/pull/1) ([@AkinAguda](https://github.com/AkinAguda))
+- Release prep ([@AkinAguda](https://github.com/AkinAguda))
 
 #### ⚠️ Pushed to `main`
 
